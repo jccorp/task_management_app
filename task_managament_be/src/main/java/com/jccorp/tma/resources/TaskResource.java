@@ -73,8 +73,17 @@ public class TaskResource {
     @Path("/{taskId}")
     @UnitOfWork
     @ApiOperation(value = "Delete the task")
-    @ApiResponse(code = 200, message = "Suceess|OK")
-    public void delete(@PathParam("taskId") long id){
-        taskDAO.delete(taskDAO.findById(id).get());
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Suceess|OK"),
+            @ApiResponse(code = 404, message = "Not found!") })
+    public Response delete(@PathParam("taskId") long id){
+        Optional<Task> t = taskDAO.findById(id);
+        if(t.isPresent()){
+            taskDAO.delete(t.get());
+            return Response.ok().build();
+        }else{
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
     }
 }

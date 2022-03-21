@@ -1,6 +1,6 @@
 package com.jccorp.tma;
 
-//import com.jccorp.tma.health.TemplateHealthCheck;
+import com.jccorp.tma.health.BasicHealthCheck;
 import com.jccorp.tma.model.dao.TaskDAO;
 import com.jccorp.tma.model.entity.Task;
 import com.jccorp.tma.resources.TaskResource;
@@ -31,7 +31,6 @@ public class ServiceTaskManagementApplication extends Application<ServiceTaskMan
                 }
             };
 
-
     @Override
     public String getName() {
         return "task-management-be";
@@ -54,7 +53,6 @@ public class ServiceTaskManagementApplication extends Application<ServiceTaskMan
                 return configuration.swaggerBundleConfiguration;
             }
         });
-
     }
 
     @Override
@@ -62,15 +60,13 @@ public class ServiceTaskManagementApplication extends Application<ServiceTaskMan
                     Environment environment) {
         final TaskDAO dao = new TaskDAO(hibernateBundle.getSessionFactory());
 
-
         final TaskResource resource = new TaskResource(
                 dao);
 
-        //final TemplateHealthCheck healthCheck =
-        //        new TemplateHealthCheck(configuration.getTemplate());
-        //environment.healthChecks().register("template", healthCheck);
-        //environment.healthChecks().register("database", new DatabaseHealthCheck(database));
+        final BasicHealthCheck healthCheck =
+                new BasicHealthCheck(configuration.getTemplate());
 
+        environment.healthChecks().register("template", healthCheck);
         environment.jersey().register(resource);
 
         final FilterRegistration.Dynamic cors =
@@ -83,6 +79,5 @@ public class ServiceTaskManagementApplication extends Application<ServiceTaskMan
 
         // Add URL mapping
         cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
-
     }
 }
