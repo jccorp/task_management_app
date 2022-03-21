@@ -11,6 +11,7 @@ import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -84,6 +85,5 @@ public class TaskResource {
         }else{
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-
     }
 }

@@ -2,6 +2,7 @@ package com.jccorp.tma;
 
 import com.jccorp.tma.health.BasicHealthCheck;
 import com.jccorp.tma.model.dao.TaskDAO;
+import com.jccorp.tma.model.dao.TaskDAOImpl;
 import com.jccorp.tma.model.entity.Task;
 import com.jccorp.tma.resources.TaskResource;
 import io.dropwizard.Application;
@@ -58,7 +59,7 @@ public class ServiceTaskManagementApplication extends Application<ServiceTaskMan
     @Override
     public void run(ServiceTaskManagementConfiguration configuration,
                     Environment environment) {
-        final TaskDAO dao = new TaskDAO(hibernateBundle.getSessionFactory());
+        final TaskDAO dao = new TaskDAOImpl(hibernateBundle.getSessionFactory());
 
         final TaskResource resource = new TaskResource(
                 dao);

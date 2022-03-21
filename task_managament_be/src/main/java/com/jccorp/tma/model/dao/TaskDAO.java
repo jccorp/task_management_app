@@ -1,34 +1,19 @@
 package com.jccorp.tma.model.dao;
 
 import com.jccorp.tma.model.entity.Task;
-import io.dropwizard.hibernate.AbstractDAO;
-import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.Optional;
 
-public class TaskDAO extends AbstractDAO<Task> {
-    public TaskDAO(SessionFactory factory) {
-        super(factory);
-    }
+public interface TaskDAO  {
 
-    public Optional<Task> findById(Long id) {
-        return Optional.ofNullable(get(id));
-    }
+    Optional<Task> findById(Long id);
 
-    public Task create(Task task) {
-        return persist(task);
-    }
+    Task create(Task task);
 
-    public List<Task> findAll() {
-        return list(namedTypedQuery("com.jccorp.tma.model.entity.Task.findAll"));
-    }
+    List<Task> findAll();
 
-    public void delete(Task task){
-        currentSession().delete(task);
-    }
+    void delete(Task task);
 
-    public void update(Task task){
-        currentSession().saveOrUpdate(task);
-    }
+    void update(Task task);
 }

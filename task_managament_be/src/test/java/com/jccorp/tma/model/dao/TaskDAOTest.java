@@ -27,7 +27,7 @@ public class TaskDAOTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        taskDAO = new TaskDAO(daoTestRule.getSessionFactory());
+        taskDAO = new TaskDAOImpl(daoTestRule.getSessionFactory());
     }
 
     @Test
