@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:14-alpine
 WORKDIR /task_management-fe
 COPY package* ./
 RUN npm install
