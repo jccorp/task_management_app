@@ -1,0 +1,11 @@
+template: Hello, %s!
+defaultName: Stranger
+
+database:
+  driverClass: <ADD_YOUR_DATA>
+  user: <ADD_YOUR_DATA>
+  password: <ADD_YOUR_DATA>
+  url: jdbc:h2:<ADD_YOUR_DATA>
+
+swagger:
+  resourcePackage: com.jccorp.tma.resources
