@@ -1,6 +1,40 @@
-# Getting Started with Create React App
+# Getting Started with Task Management Front End
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Prerequisites
+* Have Nodejs installed.
+* Have Docker installed (For running the app in a container)
+
+This app was developed with the Reactjs. [more info](https://reactjs.org/)
+
+After cloned this repo you must execute the following command to install the dependencies:
+### `npm install`
+
+### .env
+In the file .env is where you configure the url of the backend application.
+So you must set REACT_APP_API_ENDPOINT variable in order to make the app work correctly.
+**DONT COMMIT THE CHANGES OF THIS FILE**
+
+After that you are ready to start the app en dev mode:
+### `npm start`
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### Reports
+Unit test reports are under the coverage folder of this repo:
+* lcov-report/index.html
+
+## Docker
+
+The application includes a Dockerfile to execute it in a
+container.
+To generate the image you should execute this command:
+
+### `docker build --tag=task-management-fe:latest .`
+
+To execute the container type the following command:
+### `docker run -d -p8080:8080 task-management-fe:latest`
+
 
 ## Available Scripts
 
@@ -28,43 +62,3 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
