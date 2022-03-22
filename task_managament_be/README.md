@@ -13,6 +13,7 @@ This microservice was developed with the Dropwizard framework. [more info](https
 
 ### local.config.yml
 In the file local.config.yml is where you configure the application.[more info](https://www.dropwizard.io/en/latest/manual/configuration.html).
+***DON'T COMMIT CHANGES OF THIS FILE***
 
 In this file you should replace the database connection values, in my 
 case, I'm using H2 DB.
