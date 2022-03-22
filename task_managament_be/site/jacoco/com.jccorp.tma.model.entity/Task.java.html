@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Task.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">task_managament_be</a> &gt; <a href="index.source.html" class="el_package">com.jccorp.tma.model.entity</a> &gt; <span class="el_source">Task.java</span></div><h1>Task.java</h1><pre class="source lang-java linenums">package com.jccorp.tma.model.entity;
+
+import io.swagger.annotations.ApiModelProperty;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.Objects;
+
+@Entity
+@Table(name = &quot;tasks&quot;)
+@NamedQuery(
+        name = &quot;com.jccorp.tma.model.entity.Task.findAll&quot;,
+        query = &quot;SELECT t FROM Task t&quot;
+)
+public class Task {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(nullable = false)
+    @ApiModelProperty(notes = &quot;Description of the task&quot;,name=&quot;description&quot;,required=true,value=&quot;task 1&quot;)
+    private String description;
+
+    @Column
+    private Boolean completed;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    private Date dueDate;
+
+<span class="fc" id="L31">    public Task(){</span>
+
+<span class="fc" id="L33">    }</span>
+
+<span class="fc" id="L35">    public Task(String description, Boolean completed, Date dueDate) {</span>
+<span class="fc" id="L36">        this.description = description;</span>
+<span class="fc" id="L37">        this.completed = completed;</span>
+<span class="fc" id="L38">        this.dueDate = dueDate;</span>
+<span class="fc" id="L39">    }</span>
+
+    public long getId() {
+<span class="fc" id="L42">        return id;</span>
+    }
+
+    public void setId(long id) {
+<span class="fc" id="L46">        this.id = id;</span>
+<span class="fc" id="L47">    }</span>
+
+    public String getDescription() {
+<span class="fc" id="L50">        return description;</span>
+    }
+
+    public void setDescription(String description) {
+<span class="fc" id="L54">        this.description = description;</span>
+<span class="fc" id="L55">    }</span>
+
+    public Boolean getCompleted() {
+<span class="fc" id="L58">        return completed;</span>
+    }
+
+    public void setCompleted(Boolean completed) {
+<span class="fc" id="L62">        this.completed = completed;</span>
+<span class="fc" id="L63">    }</span>
+
+    public Date getDueDate() {
+<span class="fc" id="L66">        return dueDate;</span>
+    }
+
+    public void setDueDate(Date dueDate) {
+<span class="fc" id="L70">        this.dueDate = dueDate;</span>
+<span class="fc" id="L71">    }</span>
+
+    @Override
+    public boolean equals(Object o) {
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        if (this == o) return true;</span>
+<span class="pc bpc" id="L76" title="2 of 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+<span class="fc" id="L77">        Task task = (Task) o;</span>
+<span class="pc bpc" id="L78" title="3 of 8 branches missed.">        return id == task.id &amp;&amp; Objects.equals(description, task.description) &amp;&amp; Objects.equals(completed, task.completed) &amp;&amp; Objects.equals(dueDate, task.dueDate);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L83">        return Objects.hash(id, description, completed, dueDate);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

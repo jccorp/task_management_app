@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TaskDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">task_managament_be</a> &gt; <a href="index.source.html" class="el_package">com.jccorp.tma.model.dao</a> &gt; <span class="el_source">TaskDAO.java</span></div><h1>TaskDAO.java</h1><pre class="source lang-java linenums">package com.jccorp.tma.model.dao;
+
+import com.jccorp.tma.model.entity.Task;
+import io.dropwizard.hibernate.AbstractDAO;
+import org.hibernate.SessionFactory;
+
+import java.util.List;
+import java.util.Optional;
+
+public class TaskDAO extends AbstractDAO&lt;Task&gt; {
+    public TaskDAO(SessionFactory factory) {
+<span class="fc" id="L12">        super(factory);</span>
+<span class="fc" id="L13">    }</span>
+
+    public Optional&lt;Task&gt; findById(Long id) {
+<span class="fc" id="L16">        return Optional.ofNullable(get(id));</span>
+    }
+
+    public Task create(Task task) {
+<span class="fc" id="L20">        return persist(task);</span>
+    }
+
+    public List&lt;Task&gt; findAll() {
+<span class="fc" id="L24">        return list(namedTypedQuery(&quot;com.jccorp.tma.model.entity.Task.findAll&quot;));</span>
+    }
+
+    public void delete(Task task){
+<span class="fc" id="L28">        currentSession().delete(task);</span>
+<span class="fc" id="L29">    }</span>
+
+    public void update(Task task){
+<span class="fc" id="L32">        currentSession().saveOrUpdate(task);</span>
+<span class="fc" id="L33">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

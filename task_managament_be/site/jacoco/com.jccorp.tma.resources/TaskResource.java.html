@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TaskResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">task_managament_be</a> &gt; <a href="index.source.html" class="el_package">com.jccorp.tma.resources</a> &gt; <span class="el_source">TaskResource.java</span></div><h1>TaskResource.java</h1><pre class="source lang-java linenums">package com.jccorp.tma.resources;
+
+import com.jccorp.tma.model.dao.TaskDAO;
+import com.jccorp.tma.model.entity.Task;
+import io.dropwizard.hibernate.UnitOfWork;
+import javax.validation.Valid;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+import java.net.URI;
+import java.util.List;
+import java.util.Optional;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
+@Path(&quot;/tasks&quot;)
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces({MediaType.APPLICATION_JSON})
+@Api(value = &quot;TaskResource&quot;)
+public class TaskResource {
+
+    private final TaskDAO taskDAO;
+
+<span class="fc" id="L28">    public TaskResource(TaskDAO taskDAO) {</span>
+<span class="fc" id="L29">        this.taskDAO = taskDAO;</span>
+<span class="fc" id="L30">    }</span>
+
+    @POST
+    @UnitOfWork
+    @ApiOperation(value = &quot;Create a new task&quot;,response = Task.class)
+    @ApiResponse(code = 201, message = &quot;Created&quot;)
+    public Response createTask(@Valid Task task) {
+<span class="fc" id="L37">        Task t = taskDAO.create(task);</span>
+<span class="fc" id="L38">        URI uri = UriBuilder.fromResource(TaskResource.class).path(&quot;/{taskId}&quot;).build(t.getId());</span>
+<span class="fc" id="L39">        return Response.created(uri).entity(t).build();</span>
+    }
+
+    @GET
+    @UnitOfWork
+    @ApiOperation(value = &quot;Get all the tasks&quot;,response = Task[].class)
+    @ApiResponse(code = 200, message = &quot;Suceess|OK&quot;)
+    public List&lt;Task&gt; getAllTasks(){
+<span class="fc" id="L47">        return taskDAO.findAll();</span>
+    }
+
+    @GET
+    @Path(&quot;/{taskId}&quot;)
+    @UnitOfWork
+    @ApiOperation(value = &quot;Get specific task&quot;)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = &quot;Suceess|OK&quot;, response = Task.class),
+            @ApiResponse(code = 404, message = &quot;Not found!&quot;) })
+    public Response getTask(@PathParam(&quot;taskId&quot;) long id){
+<span class="fc" id="L58">        Optional&lt;Task&gt; task = taskDAO.findById(id);</span>
+<span class="fc" id="L59">        return task.map(t -&gt; Response.ok(t).build()).orElse(Response.status(Response.Status.NOT_FOUND).build());</span>
+    }
+
+    @PUT
+    @Path(&quot;/{taskId}&quot;)
+    @UnitOfWork
+    @ApiOperation(value = &quot;Update a task&quot;,response = Task.class)
+    @ApiResponse(code = 200, message = &quot;Suceess|OK&quot;)
+    public Task updateTask(@PathParam(&quot;taskId&quot;) long id,@Valid Task task){
+<span class="fc" id="L68">        task.setId(id);</span>
+<span class="fc" id="L69">        taskDAO.update(task);</span>
+<span class="fc" id="L70">        return task;</span>
+    }
+
+    @DELETE
+    @Path(&quot;/{taskId}&quot;)
+    @UnitOfWork
+    @ApiOperation(value = &quot;Delete the task&quot;)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = &quot;Suceess|OK&quot;),
+            @ApiResponse(code = 404, message = &quot;Not found!&quot;) })
+    public Response delete(@PathParam(&quot;taskId&quot;) long id){
+<span class="fc" id="L81">        Optional&lt;Task&gt; t = taskDAO.findById(id);</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        if(t.isPresent()){</span>
+<span class="fc" id="L83">            taskDAO.delete(t.get());</span>
+<span class="fc" id="L84">            return Response.ok().build();</span>
+        }else{
+<span class="fc" id="L86">            return Response.status(Response.Status.NOT_FOUND).build();</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
