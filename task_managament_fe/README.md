@@ -33,7 +33,7 @@ To generate the image you should execute this command:
 ### `docker build --tag=task-management-fe:latest .`
 
 To execute the container type the following command:
-### `docker run -d -p8080:8080 task-management-fe:latest`
+### `docker run -d -p3000:3000 task-management-fe:latest`
 
 
 ## Available Scripts
